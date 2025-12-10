@@ -1,0 +1,53 @@
+{
+  "name": "@ada/bourse-core",
+  "version": "1.0.9",
+  "description": "Shared types, interfaces, and utilities for ADA bourse admin and customer panels.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "bourse",
+    "ada",
+    "shared",
+    "typescript",
+    "vite"
+  ],
+  "author": "ada",
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.es.js"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.2.2",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.3"
+  },
+  "dependencies": {
+    "big.js": "^7.0.1",
+    "fengari-web": "^0.1.4",
+    "tslib": "^2.8.1"
+  },
+  "publishConfig": {
+    "registry": "https://repo.asredanesh.com/repository/npm-hosted/"
+  }
+}
