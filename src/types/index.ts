@@ -267,6 +267,7 @@ export interface OrderValidateResultType {
 
 export interface CheckRestrictionParamType {
     order: OrderType
+    instrument: InstrumentCache
     orderTradeValue: number
     bestBid: number
     bestAsk: number

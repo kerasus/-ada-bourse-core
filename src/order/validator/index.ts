@@ -13,8 +13,6 @@ import {
 } from "../../types";
 import {getBuyTradeValue} from '../calculator'
 import {parseOrderFlags} from '../normalizer'
-import {executeLuaScriptInWorker} from "../../workers";
-
 
 export function checkInstrumentLimits (
     order: OrderType,
@@ -156,12 +154,10 @@ export function checkWealth (
 export async function checkRestrictions (
     restrictions: RestrictionType[],
     params: CheckRestrictionParamType,
-    orderInstrument: InstrumentCache
+    executeLuaScript: (luaCode: string, params: CheckRestrictionParamType) => Promise<string>
 ): Promise<OrderValidateResultType> {
     const restrictionCount = restrictions.length
-    const newParams = JSON.parse(JSON.stringify(params))
-    newParams.instrument = orderInstrument
-    if (!newParams.instrument) {
+    if (!params.instrument) {
         return { status: false, messages: ['error.orderValidate.restrictions.instrumentNotFound'] }
     }
 
@@ -175,7 +171,7 @@ export async function checkRestrictions (
 
         let result = null
         try {
-            result = await executeLuaScriptInWorker(luaCode, newParams)
+            result = await executeLuaScript(luaCode, params)
         } catch (e) {
             console.error(e)
             return { status: false, messages: ['error.orderValidate.restrictions.luaExecutionError'] }
@@ -199,10 +195,11 @@ export async function validateOrder (
     restrictions: RestrictionType[],
     params: CheckRestrictionParamType,
     wages: WageType[],
-    orderInstrument: InstrumentCache,
-    userInstrument: UserInstrumentType | undefined
+    userInstrument: UserInstrumentType | undefined,
+    executeLuaScript: (luaCode: string, params: CheckRestrictionParamType) => Promise<string>
 ): Promise<OrderValidateResultType> {
     const order = params.order
+    const orderInstrument = params.instrument
 
     if (params.orderRequestType === OrderRequestTypeKeys.DRAFT) {
         return {
@@ -246,7 +243,7 @@ export async function validateOrder (
         }
     }
 
-    const restrictionsResult = await checkRestrictions(restrictions, params, orderInstrument)
+    const restrictionsResult = await checkRestrictions(restrictions, params, executeLuaScript)
     if (!restrictionsResult.status) {
         return {
             status: false,

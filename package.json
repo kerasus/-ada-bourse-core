@@ -1,6 +1,6 @@
 {
   "name": "@ada/bourse-core",
-  "version": "1.0.9",
+  "version": "1.0.15",
   "description": "Shared types, interfaces, and utilities for ADA bourse admin and customer panels.",
   "type": "module",
   "main": "./dist/index.cjs",

@@ -15,8 +15,9 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "AdaBourseCore",
-      fileName: "index",
-      formats: ["es", "cjs"]
+      formats: ["es", "cjs"],
+      fileName: (format) =>
+          format === 'es' ? 'index.es.js' : 'index.cjs'
     },
     sourcemap: true,
     rollupOptions: {
