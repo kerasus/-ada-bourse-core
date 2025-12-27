@@ -1,5 +1,5 @@
-import {InstrumentCache} from "./instrumentCache.js";
-import type {CustomerAccountBalanceType} from './user.js'
+import type { InstrumentCache } from './instrumentCache.js'
+import type { CustomerAccountBalanceType } from './user.js'
 
 export * from './instrument'
 export * from './instrumentCache'
@@ -268,7 +268,7 @@ export interface OrderValidateResultType {
 export interface CheckRestrictionParamType {
     order: OrderType
     instrument: InstrumentCache
-    orderTradeValue: number
+    // orderTradeValue: number
     bestBid: number
     bestAsk: number
     customer: {

@@ -1,7 +1,7 @@
 import { UserInstrumentClass } from './user.js'
 import type { UserInstrumentType } from './user.js'
 import type { Notification } from './notification.js'
-import { Instrument, DailyPrice, MarketHistory, Wealth } from './instrument.js'
+import type { Instrument, DailyPrice, MarketHistory, Wealth } from './instrument.js'
 
 export interface IInstrumentCache extends Instrument,
   DailyPrice,
@@ -54,8 +54,8 @@ export class InstrumentCache implements IInstrumentCache {
   last: number
   notifications: Array<Notification>
   market: number
-  marketFlowId: number
-  sectorId: number
+  marketFlowId?: number
+  sectorId?: number
   flow: number
   quantityRate: number
   priceRate: number

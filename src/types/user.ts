@@ -1,5 +1,5 @@
 import type { InstrumentCache } from './instrumentCache.js'
-import {AccountsTypeKeys} from "./index";
+import { AccountsTypeKeys } from './index'
 
 export interface TradeType {
   id: number | null
